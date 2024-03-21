@@ -4,7 +4,17 @@ builder.prismaNode('User', {
     id: { field: 'id' },
     fields: (t) => ({
         coupons: t.relation('coupons'),
-        tuitions: t.relation('tuitions')
+        tuitions: t.relation('tuitions'),
+        twentyMinuteCouponCount: t.relationCount('coupons', {
+            where: {
+                type: 'TWENTY'
+            }
+        }),
+        fortyMinuteCouponCount: t.relationCount('coupons', {
+            where: {
+                type: 'FORTY'
+            }
+        })
     })
 })
 
