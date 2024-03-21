@@ -1,7 +1,7 @@
 {
   "src": "./",
   "language": "typescript",
-  "schema": "./src/schema.graphql",
+  "schema": "./graphql/schema.graphql",
   "exclude": [
     "**/node_modules/**",
     "**/__mocks__/**",

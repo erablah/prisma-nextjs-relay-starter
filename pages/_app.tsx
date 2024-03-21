@@ -1,8 +1,8 @@
 import { RelayEnvironmentProvider } from "react-relay";
-import { initRelayEnvironment } from "../src/RelayEnvironment";
+import { initRelayEnvironment } from "../lib/relay/RelayEnvironment";
 import { RecordSource } from "relay-runtime";
 import { useMemo, useEffect } from "react";
-import { RelayPageProps } from "../src/relay-types";
+import { RelayPageProps } from "../lib/relay/relay-types";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
