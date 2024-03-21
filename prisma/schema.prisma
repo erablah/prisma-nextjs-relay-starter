@@ -8,15 +8,19 @@ generator client {
   provider = "prisma-client-js"
 }
 
+generator pothos {
+  provider = "prisma-pothos-types"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id          String    @id @default(uuid())
-  tuitions    Tuition[]
-  couponCount Int       @default(0)
+  id       String          @id @default(uuid())
+  tuitions Tuition[]
+  coupons  TuitionCoupon[]
 }
 
 model Tutor {
@@ -41,10 +45,19 @@ model Tuition {
 }
 
 model TuitionCoupon {
-  id String @id @default(uuid())
+  id     String        @id @default(uuid())
+  user   User          @relation(fields: [userId], references: [id])
+  userId String
+  type   TuitionType
+  status TuitionStatus
 }
 
 enum TuitionType {
   TWENTY
   FORTY
+}
+
+enum TuitionStatus {
+  ACTIVE
+  USED
 }
