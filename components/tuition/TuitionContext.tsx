@@ -1,7 +1,12 @@
+import { TuitionType } from '@prisma/client';
 import React, { createContext, useContext, useState } from 'react';
 
 interface TuitionApplication {
-    couponId: string;
+    couponId?: string;
+    userId?: string;
+    startTime?: Date;
+    endTime?: Date;
+    type?: TuitionType
 }
 
 // Define the type for the context

@@ -7,6 +7,7 @@ import { TuitionEvent } from './TuitionEvent';
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 import TutorSelectSheet, { TutorSelectSheetQuery } from './TutorSelectSheet';
 import type { TutorSelectSheetQuery as SelectSheetQueryType } from '@/__generated__/TutorSelectSheetQuery.graphql';
+import { useTuitionContext } from './TuitionContext';
 
 interface IGridCellProps {
     startTime: Date;
@@ -22,14 +23,14 @@ const TuitionCalendarCellFragment = graphql`
 
 const TuitionCalendarCell: React.FC<IGridCellProps> = ({ startTime, user }) => {
     const data = useFragment(TuitionCalendarCellFragment, user);
-
+    const { TuitionApplication, setTuitionApplication } = useTuitionContext();
     const [tutorSelectSheetQueryRef, loadTutorSelectSheetQuery] = useQueryLoader<SelectSheetQueryType>(TutorSelectSheetQuery)
 
     const isDisabled = isBefore(startTime, addHours(new Date(), 2));
 
     const handleClick = () => {
         if (isDisabled) return;
-
+        setTuitionApplication((application) => { return { startTime: startTime, ...application } })
         loadTutorSelectSheetQuery({ startTime: startTime.toISOString(), endTime: addHours(startTime, 1).toISOString() })
 
         console.log(startTime, isDisabled)

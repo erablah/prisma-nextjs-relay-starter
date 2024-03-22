@@ -33,4 +33,6 @@ builder.queryType({
     }),
 });
 
+builder.mutationType({})
+
 builder.addScalarType("Date", DateTimeResolver, {})

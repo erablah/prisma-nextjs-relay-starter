@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<b04099ed90c077d0c89dc57d8880782f>>
+ * @generated SignedSource<<8656b68bd4b917860831678f23055163>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -98,6 +98,13 @@ return {
             "alias": null,
             "args": null,
             "kind": "ScalarField",
+            "name": "id",
+            "storageKey": null
+          },
+          {
+            "alias": null,
+            "args": null,
+            "kind": "ScalarField",
             "name": "name",
             "storageKey": null
           },
@@ -107,13 +114,6 @@ return {
             "kind": "ScalarField",
             "name": "education",
             "storageKey": null
-          },
-          {
-            "alias": null,
-            "args": null,
-            "kind": "ScalarField",
-            "name": "id",
-            "storageKey": null
           }
         ],
         "storageKey": null
@@ -121,12 +121,12 @@ return {
     ]
   },
   "params": {
-    "cacheID": "7dd7f69854eceea4374ad8f5906bfc57",
+    "cacheID": "14e6d70cbfdb7b24379e725c65c509f9",
     "id": null,
     "metadata": {},
     "name": "TutorSelectSheetQuery",
     "operationKind": "query",
-    "text": "query TutorSelectSheetQuery(\n  $startTime: String\n  $endTime: String\n) {\n  tutors(startTime: $startTime, endTime: $endTime) {\n    ...TutorCardFragment\n    id\n  }\n}\n\nfragment TutorCardFragment on Tutor {\n  name\n  education\n}\n"
+    "text": "query TutorSelectSheetQuery(\n  $startTime: String\n  $endTime: String\n) {\n  tutors(startTime: $startTime, endTime: $endTime) {\n    ...TutorCardFragment\n    id\n  }\n}\n\nfragment TutorCardFragment on Tutor {\n  id\n  name\n  education\n}\n"
   }
 };
 })();

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<8c223d43f4845fdf5402544dd2052af1>>
+ * @generated SignedSource<<59404d96375aea19861baf00781f36d5>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -19,6 +19,7 @@ export type TuitionTypeSelectFragment$data = {
     readonly type: TuitionType;
   }>;
   readonly fortyMinuteCouponCount: number;
+  readonly id: string;
   readonly twentyMinuteCouponCount: number;
   readonly " $fragmentType": "TuitionTypeSelectFragment";
 };
@@ -27,7 +28,15 @@ export type TuitionTypeSelectFragment$key = {
   readonly " $fragmentSpreads": FragmentRefs<"TuitionTypeSelectFragment">;
 };
 
-const node: ReaderFragment = {
+const node: ReaderFragment = (function(){
+var v0 = {
+  "alias": null,
+  "args": null,
+  "kind": "ScalarField",
+  "name": "id",
+  "storageKey": null
+};
+return {
   "argumentDefinitions": [],
   "kind": "Fragment",
   "metadata": null,
@@ -41,13 +50,7 @@ const node: ReaderFragment = {
       "name": "coupons",
       "plural": true,
       "selections": [
-        {
-          "alias": null,
-          "args": null,
-          "kind": "ScalarField",
-          "name": "id",
-          "storageKey": null
-        },
+        (v0/*: any*/),
         {
           "alias": null,
           "args": null,
@@ -65,6 +68,7 @@ const node: ReaderFragment = {
       ],
       "storageKey": null
     },
+    (v0/*: any*/),
     {
       "alias": null,
       "args": null,
@@ -83,7 +87,8 @@ const node: ReaderFragment = {
   "type": "User",
   "abstractKey": null
 };
+})();
 
-(node as any).hash = "d56af72047b883970421712b706ca32c";
+(node as any).hash = "f57eada06c2b46d1d640400d3c433bff";
 
 export default node;

@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<1888beda9003b453cd99ecd2c7415bcd>>
+ * @generated SignedSource<<8ac34556bc74b5ccb62032fb7b38340f>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -102,6 +102,7 @@ return {
             ],
             "storageKey": null
           },
+          (v0/*: any*/),
           {
             "alias": null,
             "args": null,
@@ -142,20 +143,19 @@ return {
               (v0/*: any*/)
             ],
             "storageKey": null
-          },
-          (v0/*: any*/)
+          }
         ],
         "storageKey": null
       }
     ]
   },
   "params": {
-    "cacheID": "62cfcb02f89417d6458aba2b7eec63bc",
+    "cacheID": "9962efcbf21bff3e4978530efe68030b",
     "id": null,
     "metadata": {},
     "name": "pagesIndexQuery",
     "operationKind": "query",
-    "text": "query pagesIndexQuery {\n  users {\n    ...TuitionTypeSelectFragment\n    ...WeeklyEventCalendarFragment\n    id\n  }\n}\n\nfragment TuitionCalendarCellFragment on User {\n  ...TuitionEventFragment\n}\n\nfragment TuitionEventFragment on User {\n  tuitions {\n    startTime\n    endTime\n    type\n    id\n  }\n}\n\nfragment TuitionTypeSelectFragment on User {\n  coupons {\n    id\n    type\n    status\n  }\n  twentyMinuteCouponCount\n  fortyMinuteCouponCount\n}\n\nfragment WeeklyEventCalendarFragment on User {\n  ...TuitionCalendarCellFragment\n}\n"
+    "text": "query pagesIndexQuery {\n  users {\n    ...TuitionTypeSelectFragment\n    ...WeeklyEventCalendarFragment\n    id\n  }\n}\n\nfragment TuitionCalendarCellFragment on User {\n  ...TuitionEventFragment\n}\n\nfragment TuitionEventFragment on User {\n  tuitions {\n    startTime\n    endTime\n    type\n    id\n  }\n}\n\nfragment TuitionTypeSelectFragment on User {\n  coupons {\n    id\n    type\n    status\n  }\n  id\n  twentyMinuteCouponCount\n  fortyMinuteCouponCount\n}\n\nfragment WeeklyEventCalendarFragment on User {\n  ...TuitionCalendarCellFragment\n}\n"
   }
 };
 })();

@@ -1,6 +1,6 @@
 import { builder } from "../builder";
 
-builder.prismaNode('User', {
+export const User = builder.prismaNode('User', {
     id: { field: 'id' },
     fields: (t) => ({
         coupons: t.relation('coupons'),

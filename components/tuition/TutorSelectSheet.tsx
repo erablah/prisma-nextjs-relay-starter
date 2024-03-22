@@ -16,8 +16,6 @@ export const TutorSelectSheetQuery = graphql`
 const TutorSelectSheet = ({ queryRef, startTime }: { queryRef: PreloadedQuery<QueryType>, startTime: Date }) => {
     const data = usePreloadedQuery(TutorSelectSheetQuery, queryRef);
 
-    console.log(data);
-
     return (
         <SheetContent>
             <SheetHeader>

@@ -4,6 +4,7 @@ import { graphql } from "relay-runtime"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { useRouter } from "next/router"
 import { useTuitionContext } from "./TuitionContext"
+import { TuitionType } from "@prisma/client"
 
 const TuitionTypeSelectFragment = graphql`
     fragment TuitionTypeSelectFragment on User {
@@ -12,6 +13,7 @@ const TuitionTypeSelectFragment = graphql`
             type
             status
         }
+        id
         twentyMinuteCouponCount
         fortyMinuteCouponCount
 }`
@@ -22,11 +24,11 @@ export const TutionTypeSelect = ({ user }: { user: TuitionTypeSelectFragment$key
     const data = useFragment(TuitionTypeSelectFragment, user);
     const router = useRouter();
 
-    const handleChange = (value: string) => {
+    const handleChange = (value: TuitionType) => {
         const coupon = data.coupons.find((coupon) => (coupon.type === value && coupon.status === "ACTIVE"));
 
         if (!coupon?.id) throw Error('no valid coupons')
-        setTuitionApplication({ couponId: coupon.id });
+        setTuitionApplication((application) => { return { couponId: coupon.id, userId: data.id, type: value, ...application } });
     }
 
     return (
