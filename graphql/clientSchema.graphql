@@ -1,0 +1,7 @@
+type SelectedTuitionCoupon {
+    coupon: TuitionCoupon
+}
+
+extend type User {
+    selectedCoupon: SelectedTuitionCoupon
+}

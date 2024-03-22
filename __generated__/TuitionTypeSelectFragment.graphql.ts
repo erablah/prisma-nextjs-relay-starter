@@ -1,5 +1,5 @@
 /**
- * @generated SignedSource<<c0c9af5746020a056f6a4fd71cf5948e>>
+ * @generated SignedSource<<8c223d43f4845fdf5402544dd2052af1>>
  * @lightSyntaxTransform
  * @nogrep
  */
@@ -9,8 +9,15 @@
 // @ts-nocheck
 
 import { Fragment, ReaderFragment } from 'relay-runtime';
+export type TuitionStatus = "ACTIVE" | "USED" | "%future added value";
+export type TuitionType = "FORTY" | "TWENTY" | "%future added value";
 import { FragmentRefs } from "relay-runtime";
 export type TuitionTypeSelectFragment$data = {
+  readonly coupons: ReadonlyArray<{
+    readonly id: string;
+    readonly status: TuitionStatus;
+    readonly type: TuitionType;
+  }>;
   readonly fortyMinuteCouponCount: number;
   readonly twentyMinuteCouponCount: number;
   readonly " $fragmentType": "TuitionTypeSelectFragment";
@@ -26,6 +33,38 @@ const node: ReaderFragment = {
   "metadata": null,
   "name": "TuitionTypeSelectFragment",
   "selections": [
+    {
+      "alias": null,
+      "args": null,
+      "concreteType": "TuitionCoupon",
+      "kind": "LinkedField",
+      "name": "coupons",
+      "plural": true,
+      "selections": [
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "id",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "type",
+          "storageKey": null
+        },
+        {
+          "alias": null,
+          "args": null,
+          "kind": "ScalarField",
+          "name": "status",
+          "storageKey": null
+        }
+      ],
+      "storageKey": null
+    },
     {
       "alias": null,
       "args": null,
@@ -45,6 +84,6 @@ const node: ReaderFragment = {
   "abstractKey": null
 };
 
-(node as any).hash = "acf3ff6a62be94ce8a109d48785d1631";
+(node as any).hash = "d56af72047b883970421712b706ca32c";
 
 export default node;

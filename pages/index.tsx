@@ -6,11 +6,13 @@ import { pagesIndexQuery, pagesIndexQuery$data } from "@/__generated__/pagesInde
 import { initRelayEnvironment } from "@/lib/relay/RelayEnvironment";
 import { TutionTypeSelect } from "@/components/tuition/TuitionTypeSelect";
 import WeeklyEventCalendar from "@/components/tuition/WeeklyEventCalendar";
+import { TuitionProvider } from "@/components/tuition/TuitionContext";
 
 const indexQuery = graphql`
   query pagesIndexQuery {
     users {
       ...TuitionTypeSelectFragment
+      ...WeeklyEventCalendarFragment
     }
   }
 `
@@ -25,19 +27,22 @@ export default function Home({ data }: Props) {
 
   const week = new Date();
 
+
   return (
     <Layout>
-      <div className="hidden flex-col md:flex">
-        <div className="flex-1 space-y-4 p-8 pt-6">
-          <div className="flex items-center justify-between space-y-2 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-bold tracking-tight">수강신청</h2>
-            <div className="grid">
-              <TutionTypeSelect user={user}></TutionTypeSelect>
+      <TuitionProvider>
+        <div className="hidden flex-col md:flex">
+          <div className="flex-1 space-y-4 p-8 pt-6">
+            <div className="flex items-center justify-between space-y-2 max-w-7xl mx-auto">
+              <h2 className="text-3xl font-bold tracking-tight">수강신청</h2>
+              <div className="grid">
+                <TutionTypeSelect user={user}></TutionTypeSelect>
+              </div>
             </div>
+            <WeeklyEventCalendar week={week} user={user} />
           </div>
-          <WeeklyEventCalendar week={week} />
         </div>
-      </div>
+      </TuitionProvider>
     </Layout >
   );
 }

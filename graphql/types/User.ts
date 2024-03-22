@@ -4,7 +4,26 @@ builder.prismaNode('User', {
     id: { field: 'id' },
     fields: (t) => ({
         coupons: t.relation('coupons'),
-        tuitions: t.relation('tuitions'),
+        tuitions: t.relation('tuitions', {
+            args: {
+                startTime: t.arg.string(),
+                endTime: t.arg.string()
+            },
+            query: (args) => ({
+                where: {
+                    ...(args.startTime && {
+                        startTime: {
+                            gte: new Date(args.startTime)
+                        }
+                    }),
+                    ...(args.endTime && {
+                        endTime: {
+                            lte: new Date(args.endTime)
+                        }
+                    })
+                }
+            })
+        }),
         twentyMinuteCouponCount: t.relationCount('coupons', {
             where: {
                 type: 'TWENTY',

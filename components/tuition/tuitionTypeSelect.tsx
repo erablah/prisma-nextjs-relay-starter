@@ -3,20 +3,30 @@ import { useFragment } from "react-relay"
 import { graphql } from "relay-runtime"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select"
 import { useRouter } from "next/router"
+import { useTuitionContext } from "./TuitionContext"
 
 const TuitionTypeSelectFragment = graphql`
     fragment TuitionTypeSelectFragment on User {
+        coupons{
+            id
+            type
+            status
+        }
         twentyMinuteCouponCount
         fortyMinuteCouponCount
 }`
 
 
 export const TutionTypeSelect = ({ user }: { user: TuitionTypeSelectFragment$key }) => {
+    const { setTuitionApplication } = useTuitionContext();
     const data = useFragment(TuitionTypeSelectFragment, user);
     const router = useRouter();
 
     const handleChange = (value: string) => {
-        router.replace({ query: { ...router.query, couponType: value } })
+        const coupon = data.coupons.find((coupon) => (coupon.type === value && coupon.status === "ACTIVE"));
+
+        if (!coupon?.id) throw Error('no valid coupons')
+        setTuitionApplication({ couponId: coupon.id });
     }
 
     return (

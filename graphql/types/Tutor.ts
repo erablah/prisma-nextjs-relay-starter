@@ -13,7 +13,26 @@ builder.prismaNode('Tutor', {
 builder.queryField("tutors", (t) =>
     t.prismaField({
         type: ['Tutor'],
+        args: {
+            startTime: t.arg.string(),
+            endTime: t.arg.string()
+        },
         resolve: (query, _parent, _args, _ctx, _info) =>
-            prisma.tutor.findMany({ ...query })
+            prisma.tutor.findMany({
+                ...query, where: {
+                    ...(_args.startTime && _args.endTime && {
+                        NOT: {
+                            tuitions: {
+                                some: {
+                                    AND: [
+                                        { startTime: { lte: _args.endTime } },
+                                        { endTime: { gte: _args.startTime } }
+                                    ]
+                                }
+                            }
+                        }
+                    })
+                }, take: 5
+            })
     })
 )

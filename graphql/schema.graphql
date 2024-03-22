@@ -1,67 +1,134 @@
 """Exposes a URL that specifies the behavior of this scalar."""
+
 directive @specifiedBy(
+
   """The URL that specifies the behavior of this scalar."""
+
   url: String!
+
 ) on SCALAR
 
+
+
 """
+
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the
+
 `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO
+
 8601 standard for representation of dates and times using the Gregorian calendar.
+
 """
+
 scalar Date
 
+
+
 interface Node {
+
   id: ID!
+
 }
+
+
 
 type Query {
+
   node(id: ID!): Node
+
   nodes(ids: [ID!]!): [Node]!
+
   ok: Boolean!
-  tutors: [Tutor!]!
+
+  tutors(endTime: String, startTime: String): [Tutor!]!
+
   users: [User!]!
+
 }
+
+
 
 type Tuition implements Node {
+
   endTime: Date!
+
   id: ID!
+
   startTime: Date!
+
   tutee: User!
+
   tutor: Tutor!
+
   type: TuitionType!
+
 }
+
+
 
 type TuitionCoupon implements Node {
+
   id: ID!
+
   status: TuitionStatus!
+
   type: TuitionType!
+
   user: User!
+
 }
+
+
 
 enum TuitionStatus {
+
   ACTIVE
+
   USED
+
 }
+
+
 
 enum TuitionType {
+
   FORTY
+
   TWENTY
+
 }
+
+
 
 type Tutor implements Node {
+
   education: String!
+
   id: ID!
+
   image: String
+
   name: String!
+
   tuitions: [Tuition!]!
+
 }
 
+
+
 type User implements Node {
+
   coupons: [TuitionCoupon!]!
+
   fortyMinuteCouponCount: Int!
+
   id: ID!
-  tuitions: [Tuition!]!
+
+  tuitions(endTime: String, startTime: String): [Tuition!]!
+
   twentyMinuteCouponCount: Int!
+
 }
+
+
 

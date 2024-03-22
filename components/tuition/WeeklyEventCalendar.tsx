@@ -1,6 +1,9 @@
 import React from 'react';
 import { format, addDays, addMinutes, startOfWeek, endOfWeek } from 'date-fns';
-import GridCell from './TuitionCalendarCell'; // Import the GridCell component
+import TuitionCalendarCell from './TuitionCalendarCell'; // Import the GridCell component
+import { graphql } from 'relay-runtime';
+import { WeeklyEventCalendarFragment$key } from '@/__generated__/WeeklyEventCalendarFragment.graphql';
+import { useFragment } from 'react-relay';
 
 type Week = Date;
 type DaysOfWeek = Date[];
@@ -11,7 +14,13 @@ const timeSlots = {
     '7:00 PM': 19, '8:00 PM': 20, '9:00 PM': 21, '10:00 PM': 22, '11:00 PM': 23
 };
 
-const WeeklyEventCalendar: React.FC<{ week: Week }> = ({ week }) => {
+const WeeklyEventCalendarFragment = graphql`
+    fragment WeeklyEventCalendarFragment on User {
+        ...TuitionCalendarCellFragment
+    }
+`
+
+const WeeklyEventCalendar: React.FC<{ week: Week, user: WeeklyEventCalendarFragment$key }> = ({ week, user }) => {
     // Generate array of dates for the week starting from Sunday and ending with Saturday
     const startDate = startOfWeek(week, { weekStartsOn: 0 }); // 0 means Sunday
     const endDate = endOfWeek(week, { weekStartsOn: 0 });
@@ -21,6 +30,8 @@ const WeeklyEventCalendar: React.FC<{ week: Week }> = ({ week }) => {
         daysOfWeek.push(currentDate);
         currentDate = addDays(currentDate, 1);
     }
+
+    const data = useFragment(WeeklyEventCalendarFragment, user);
 
 
     return (
@@ -45,7 +56,7 @@ const WeeklyEventCalendar: React.FC<{ week: Week }> = ({ week }) => {
                         {/* Grid cells for each day and time slot */}
                         {daysOfWeek.map((day) => {
                             return (
-                                <GridCell key={`${day}-${timeSlot}`} startTime={addMinutes(day, 60 * hours)} />
+                                <TuitionCalendarCell key={`${day}-${timeSlot}`} startTime={addMinutes(day, 60 * hours)} user={data} />
                             );
                         })}
                     </React.Fragment>
