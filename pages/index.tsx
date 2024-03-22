@@ -5,6 +5,7 @@ import { GetRelayServerSideProps } from "@/lib/relay/relay-types";
 import { pagesIndexQuery, pagesIndexQuery$data } from "@/__generated__/pagesIndexQuery.graphql";
 import { initRelayEnvironment } from "@/lib/relay/RelayEnvironment";
 import { TutionTypeSelect } from "@/components/tuition/TuitionTypeSelect";
+import WeeklyEventCalendar from "@/components/tuition/WeeklyEventCalendar";
 
 const indexQuery = graphql`
   query pagesIndexQuery {
@@ -22,7 +23,7 @@ export default function Home({ data }: Props) {
 
   const user = data.users[0];
 
-
+  const week = new Date();
 
   return (
     <Layout>
@@ -34,6 +35,7 @@ export default function Home({ data }: Props) {
               <TutionTypeSelect user={user}></TutionTypeSelect>
             </div>
           </div>
+          <WeeklyEventCalendar week={week} />
         </div>
       </div>
     </Layout >

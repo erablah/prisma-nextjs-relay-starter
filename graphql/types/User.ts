@@ -7,12 +7,14 @@ builder.prismaNode('User', {
         tuitions: t.relation('tuitions'),
         twentyMinuteCouponCount: t.relationCount('coupons', {
             where: {
-                type: 'TWENTY'
+                type: 'TWENTY',
+                status: "ACTIVE"
             }
         }),
         fortyMinuteCouponCount: t.relationCount('coupons', {
             where: {
-                type: 'FORTY'
+                type: 'FORTY',
+                status: "ACTIVE"
             }
         })
     })

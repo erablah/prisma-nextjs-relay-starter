@@ -19,11 +19,9 @@ export const TutionTypeSelect = ({ user }: { user: TuitionTypeSelectFragment$key
         router.replace({ query: { ...router.query, couponType: value } })
     }
 
-
-
     return (
         <Select onValueChange={handleChange}>
-            <SelectTrigger>
+            <SelectTrigger className="select-none">
                 <SelectValue placeholder="수업권을 선택해주세요" />
             </SelectTrigger>
             <SelectContent>
